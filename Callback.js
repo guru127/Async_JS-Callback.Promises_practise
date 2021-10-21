@@ -12,12 +12,12 @@ const getPosts=()=>{
 
  },1000)
 }
- const creatPosts=(post)=>{
+ const creatPosts=(post, callback)=>{
      setTimeout(()=>{
          posts.push(post);
+         callback();
      },2000);
  }
     
- creatPosts( {title:"title 3",  body:"this is body three"});
+ creatPosts( {title:"title 3",  body:"this is body three"}, getPosts);
 
- getPosts();
