@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise-example</title>
+</head>
+<body>
+    <script>
+        let car = new Promise(function(res , rej){
+            fuel = !true;
+            if(fuel){
+                res();
+            }
+            else{
+                rej();
+            }
+        });
+        car.then(function(){
+            document.write("hapie");
+        }).catch(function(){
+            document.write("not hapie");
+        })
+
+    </script>
+    <script>
+        let car2 ={
+            fuel : 100,
+            engine : "notgood"
+        } ;  
+        console.log(car2)     
+        const emptyTank = (car2)=>{
+            return new Promise((res, rej)=>{
+                if(car2.fuel==100){
+                 res("Have enough fuel. ");
+                }
+                else{
+                    rej("fuel is not enough")
+                }
+            })
+        }
+        const engine = (car2) =>{
+            return new Promise((res, rej)=>{
+                if(car2.engine==="good"){
+                res("engine is good. ");
+               }else{
+                  rej("engine is not good")
+               }
+            })
+        }
+        const travel= ()=>{
+            return new Promise((res, rej)=>{
+                res("lets go a ride. ")
+            })
+        }
+        emptyTank(car2)
+        .then((res)=>{
+            console.log(res);
+            return engine(car2);
+        }).then((res)=>{
+            console.log(res);
+            return travel();
+        }).then((res)=>{
+            console.log(res);
+            console.log("Done!")
+        }).catch(rej =>{
+            console.log(rej)
+        })
+    </script>
+    
+</body>
+</html>
